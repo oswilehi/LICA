@@ -19,6 +19,8 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = (props) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
+  state.isDataLoaded = false;
+
   // Is triggered whenever our state is change on our provider
   // in this case, every time a movie is added
   useEffect(() => {

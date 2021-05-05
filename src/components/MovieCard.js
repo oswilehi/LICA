@@ -34,7 +34,10 @@ const MovieCard = ({ movie }) => {
           <button
             className="btn"
             disabled={watchlistDisabled}
-            onClick={() => addToWatchlist(movie)}
+            onClick={(e) => {
+              e.preventDefault();
+              addToWatchlist(movie);
+            }}
           >
             Add to watchlist
           </button>
