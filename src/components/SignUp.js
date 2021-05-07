@@ -1,6 +1,36 @@
 import React, { Component } from "react";
+import { Auth } from "aws-amplify";
 
 class SignUp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+    };
+    this.onChange = this.onChange.bind(this);
+    this.signUp = this.signUp.bind(this);
+  }
+  async signUp() {
+    console.log(this.state);
+    try {
+      const user = await Auth.signUp({
+        username: this.state.email,
+        password: this.state.password,
+      });
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  onChange(e) {
+    this.setState({
+      email: e.target.id === "email" ? e.target.value : this.state.email,
+      password:
+        e.target.id === "password" ? e.target.value : this.state.password,
+    });
+  }
   render() {
     return (
       <div className="container">
@@ -22,6 +52,7 @@ class SignUp extends Component {
                     id="email"
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -33,6 +64,7 @@ class SignUp extends Component {
                     className="form-control"
                     aria-describedby="emailHelp"
                     placeholder="Enter Password"
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -44,6 +76,10 @@ class SignUp extends Component {
                   <button
                     type="submit"
                     className=" btn btn-block mybtn btn-primary tx-tfm"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      this.signUp();
+                    }}
                   >
                     Sign Up
                   </button>
