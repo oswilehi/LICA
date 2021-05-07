@@ -6,6 +6,7 @@ class Add extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      movie: [],
       moviesFound: [],
       pages: 1,
       actualPage: 1,
@@ -50,7 +51,7 @@ class Add extends Component {
       .then((res) => res.json())
       .then((data) => {
         if (!data.errors) {
-          console.log(data);
+          console.log(data.results);
           this.setState({
             moviesFound: data.results,
             pages: data.total_pages,
