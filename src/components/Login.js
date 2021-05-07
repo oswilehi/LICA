@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class SignUp extends Component {
+class Login extends Component {
   render() {
     return (
       <div className="container">
@@ -9,7 +9,7 @@ class SignUp extends Component {
             <div className="myform form ">
               <div className="logo mb-3">
                 <div className="col-md-12 text-center">
-                  <h1>Sign Up</h1>
+                  <h1>Login</h1>
                 </div>
               </div>
               <form>
@@ -45,8 +45,17 @@ class SignUp extends Component {
                     type="submit"
                     className=" btn btn-block mybtn btn-primary tx-tfm"
                   >
-                    Sign Up
+                    Login
                   </button>
+                </div>
+                <div className="col-md-12 ">
+                  <div className="login-or text-center">
+                    <hr className="hr-or" />
+                    <span className="span-or">or</span>
+                  </div>
+                  <div class="form-group text-center">
+                    <a href="/SignUp">Sign up</a>
+                  </div>
                 </div>
               </form>
             </div>
@@ -57,4 +66,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default Login;
