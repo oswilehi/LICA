@@ -25,13 +25,13 @@ class Add extends Component {
         {
           id: movie.id,
           image: movie.poster_path,
-        },
+        } /*,
         {
           headers: {
             authorization:
               "Bearer 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.Im9zd2lsZWhpQGdtYWlsLmNvbSI.sYRvgxsEm8ab4P8iMfq5v7TIUzl0Vmo-SY2WvAVaDJw'",
           },
-        }
+        }*/
       )
       .then((data) => {
         console.log(data.data);
