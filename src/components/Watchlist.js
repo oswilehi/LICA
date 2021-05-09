@@ -43,20 +43,15 @@ class Watchlist extends Component {
 
   removeFromWatchlist(movie) {
     axios
-      .delete(
-        `http://localhost:3000/watchlist/${movie._id}/${localStorage.getItem(
-          "user"
-        )}`,
-        {
-          headers: {
-            Authorization: localStorage.getItem(
-              `CognitoIdentityServiceProvider.5erjsnio7ungraibrdt6lsc3u3.${localStorage.getItem(
-                "user"
-              )}.idToken`
-            ),
-          },
-        }
-      )
+      .delete(`http://localhost:3000/watchlist/${movie._id}`, {
+        headers: {
+          Authorization: localStorage.getItem(
+            `CognitoIdentityServiceProvider.5erjsnio7ungraibrdt6lsc3u3.${localStorage.getItem(
+              "user"
+            )}.idToken`
+          ),
+        },
+      })
       .then((data) => {
         console.log(data.data);
       })

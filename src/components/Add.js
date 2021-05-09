@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import key from "../key";
 import axios from "../../node_modules/axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 class Add extends Component {
   constructor(props) {
@@ -39,8 +42,12 @@ class Add extends Component {
       )
       .then((data) => {
         console.log(data.data);
+        toast.success("Movie added to watch list");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        toast.error("Movie was already added");
+      });
   }
 
   getMovie(e) {
