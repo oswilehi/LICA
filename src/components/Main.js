@@ -8,6 +8,17 @@ import Add from "./Add";
 import Watched from "./Watched";
 
 class Main extends Component {
+  state = {
+    login: false,
+    verified: false,
+  };
+
+  componentDidMount() {
+    this.setState({
+      verified: true,
+    });
+  }
+
   render() {
     return (
       <Router>

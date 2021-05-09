@@ -18,20 +18,24 @@ class Add extends Component {
     this.addToWachtlist = this.addToWachtlist.bind(this);
   }
 
-  addToWachtlist(movie) {
+  async addToWachtlist(movie) {
     axios
       .post(
         "http://localhost:3000/watchlist/",
         {
           id: movie.id,
           image: movie.poster_path,
-        } /*,
+          user: localStorage.getItem("user"),
+        },
         {
           headers: {
-            authorization:
-              "Bearer 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.Im9zd2lsZWhpQGdtYWlsLmNvbSI.sYRvgxsEm8ab4P8iMfq5v7TIUzl0Vmo-SY2WvAVaDJw'",
+            Authorization: localStorage.getItem(
+              `CognitoIdentityServiceProvider.5erjsnio7ungraibrdt6lsc3u3.${localStorage.getItem(
+                "user"
+              )}.idToken`
+            ),
           },
-        }*/
+        }
       )
       .then((data) => {
         console.log(data.data);

@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 class SignUp extends Component {
   constructor(props) {
@@ -17,10 +21,13 @@ class SignUp extends Component {
       const user = await Auth.signUp({
         username: this.state.email,
         password: this.state.password,
+      }).then(() => {
+        window.location.href = "/login";
       });
       console.log(user);
     } catch (error) {
       console.log(error);
+      if (error.code === "UsernameExistsException") toast.error(error.message);
     }
   }
 
@@ -83,6 +90,15 @@ class SignUp extends Component {
                   >
                     Sign Up
                   </button>
+                </div>
+                <div className="col-md-12 ">
+                  <div className="login-or text-center">
+                    <hr className="hr-or" />
+                    <span className="span-or">or</span>
+                  </div>
+                  <div class="form-group text-center">
+                    <Link to="/login">Login</Link>
+                  </div>
                 </div>
               </form>
             </div>

@@ -18,7 +18,21 @@ class Watched extends Component {
 
   moveToWatchlist(movie) {
     axios
-      .put(`http://localhost:3000/watched/${movie._id}`)
+      .put(
+        `http://localhost:3000/watched/${movie._id}/${localStorage.getItem(
+          "user"
+        )}`,
+        {},
+        {
+          headers: {
+            Authorization: localStorage.getItem(
+              `CognitoIdentityServiceProvider.5erjsnio7ungraibrdt6lsc3u3.${localStorage.getItem(
+                "user"
+              )}.idToken`
+            ),
+          },
+        }
+      )
       .then((data) => {
         console.log(data.data);
       })
@@ -29,7 +43,20 @@ class Watched extends Component {
 
   removeFromWatched(movie) {
     axios
-      .delete(`http://localhost:3000/watched/${movie._id}`)
+      .delete(
+        `http://localhost:3000/watched/${movie._id}/${localStorage.getItem(
+          "user"
+        )}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem(
+              `CognitoIdentityServiceProvider.5erjsnio7ungraibrdt6lsc3u3.${localStorage.getItem(
+                "user"
+              )}.idToken`
+            ),
+          },
+        }
+      )
       .then((data) => {
         console.log(data.data);
       })
@@ -39,7 +66,15 @@ class Watched extends Component {
 
   getWatched() {
     axios
-      .get(`http://localhost:3000/watched/`)
+      .get(`http://localhost:3000/watched/${localStorage.getItem("user")}`, {
+        headers: {
+          Authorization: localStorage.getItem(
+            `CognitoIdentityServiceProvider.5erjsnio7ungraibrdt6lsc3u3.${localStorage.getItem(
+              "user"
+            )}.idToken`
+          ),
+        },
+      })
       .then((data) => {
         this.setState({
           watched: data.data,

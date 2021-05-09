@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 class Login extends Component {
   constructor(props) {
@@ -13,7 +17,18 @@ class Login extends Component {
   }
   async signIn() {
     try {
-      const user = await Auth.signIn(this.state.email, this.state.password);
+      const user = await Auth.signIn(this.state.email, this.state.password)
+        .then((user) => {
+          localStorage.setItem("user", user.username);
+          window.location.href = "/add";
+        })
+        .catch((error) => {
+          console.log(error.code);
+          if (error.code === "UserNotConfirmedException")
+            toast.error("Check your email and verify your account");
+          else if (error.code === "NotAuthorizedException")
+            toast.error(error.message);
+        });
       console.log(user);
     } catch (error) {
       console.log(error);
@@ -87,7 +102,7 @@ class Login extends Component {
                     <span className="span-or">or</span>
                   </div>
                   <div class="form-group text-center">
-                    <a href="/SignUp">Sign up</a>
+                    <Link to="/SignUp">Sign up</Link>
                   </div>
                 </div>
               </form>

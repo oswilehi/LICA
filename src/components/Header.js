@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Auth } from "aws-amplify";
 
 const Header = () => {
   return (
@@ -20,6 +21,17 @@ const Header = () => {
             </li>
             <li>
               <Link to="/watched">Watched</Link>
+            </li>
+            <li>
+              <Link
+                to="/login"
+                onClick={() => {
+                  Auth.signOut({ global: true });
+                  localStorage.removeItem("user");
+                }}
+              >
+                Sign Out
+              </Link>
             </li>
           </ul>
         </div>
