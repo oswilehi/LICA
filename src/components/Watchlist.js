@@ -35,10 +35,9 @@ class Watchlist extends Component {
       )
       .then((data) => {
         console.log(data.data);
+        window.location.reload(false);
       })
       .catch((error) => console.log(error));
-
-    window.location.reload(false);
   }
 
   removeFromWatchlist(movie) {
